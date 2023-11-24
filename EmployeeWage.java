@@ -1,6 +1,7 @@
 package com.bridgelabs.Master;
 
 import com.bridgelabs.usecase1.Attendance;
+import com.bridgelabs.usecase4.SwitchCase;
 
 public class EmployeeWage {
 
@@ -8,7 +9,7 @@ public class EmployeeWage {
 		// TODO Auto-generated method stub
 		System.out.println("Welcome to Employee Wage  Computation Program");
 
-		solvingUsingSwitchCase();
+		calculateWagesForMonth();
 
 	}
 
@@ -152,6 +153,33 @@ public class EmployeeWage {
 		empDetails[1] = empHrs;
 
 		return empDetails;
+	}
+
+	// UC-5 Calculating Wages for a Month Assume 20 Working Day per Month
+
+	/*
+	 * @params : void
+	 * 
+	 * @return : void
+	 * 
+	 * @Description : UC-5 Calculating Wages for a Month
+	 */
+
+	public static void calculateWagesForMonth() {
+
+		int NUM_OF_WORKING_DAYS = 20;
+
+		int totalEmpWage = 0;
+
+		int[] empDetails = new int[2];
+
+		for (int day = 0; day < NUM_OF_WORKING_DAYS; day++) {
+			System.out.println(day + 1);
+			empDetails = SwitchCase.solvingUsingSwitchCase();
+			totalEmpWage += empDetails[0];
+
+		}
+		System.out.println("Total Employee Wage : " + totalEmpWage);
 	}
 
 }
