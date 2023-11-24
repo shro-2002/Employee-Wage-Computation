@@ -1,15 +1,12 @@
 package com.bridgelabs.Master;
 
-import com.bridgelabs.usecase1.Attendance;
-import com.bridgelabs.usecase4.SwitchCase;
-
 public class EmployeeWage {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("Welcome to Employee Wage  Computation Program");
 
-		calculateWagesForMonth();
+		calculateWagesTillCondition();
 
 	}
 
@@ -43,7 +40,7 @@ public class EmployeeWage {
 
 	public static int calculateDailyEmployeeWage() {
 
-		int attend = Attendance.checkEmpPresentOrAbsent();
+		int attend = checkEmpPresentOrAbsent();
 		int full_time = 1;
 		int wage_per_hour = 20;
 		int empHrs = 0;
@@ -75,7 +72,7 @@ public class EmployeeWage {
 		int wage_per_hour = 20;
 		int empHrs = 0;
 		int empWage = 0;
-		int attend = Attendance.checkEmpPresentOrAbsent();
+		int attend = checkEmpPresentOrAbsent();
 
 		part_time = 0;
 		full_time = present = 1;
@@ -123,7 +120,7 @@ public class EmployeeWage {
 		int wage_per_hour = 20;
 		int empHrs = 0;
 		int empWage = 0;
-		int attend = Attendance.checkEmpPresentOrAbsent();
+		int attend = checkEmpPresentOrAbsent();
 
 		int[] empDetails = new int[2];
 
@@ -175,11 +172,49 @@ public class EmployeeWage {
 
 		for (int day = 0; day < NUM_OF_WORKING_DAYS; day++) {
 			System.out.println(day + 1);
-			empDetails = SwitchCase.solvingUsingSwitchCase();
+			empDetails = solvingUsingSwitchCase();
 			totalEmpWage += empDetails[0];
 
 		}
 		System.out.println("Total Employee Wage : " + totalEmpWage);
+	}
+
+	// UC-6 : Calculate Wages till a condition of total working hours or days is
+	// reached for a month
+
+	/*
+	 * @params : None
+	 * 
+	 * @return : None
+	 * 
+	 * @Description : UC-6 Calculate Wages till a condition of total working hours
+	 * or days is reached for a month
+	 */
+
+	public static void calculateWagesTillCondition() {
+
+		int totalEmpHrs, totalWorkingDays, totalEmpWage;
+
+		totalEmpHrs = totalWorkingDays = totalEmpWage = 0;
+
+		int[] empDetails = new int[2];
+
+		while (totalEmpHrs <= 100 && totalWorkingDays < 20) {
+			System.out.println("DAY: " + (totalWorkingDays + 1));
+			empDetails = solvingUsingSwitchCase();
+			totalEmpWage += empDetails[0];
+			totalEmpHrs += empDetails[1];
+
+			totalWorkingDays++;
+
+			System.out.println();
+
+		}
+
+		System.out.println("Total Employee Wage : " + totalEmpWage);
+		System.out.println("Total Working hours : " + totalEmpHrs);
+		System.out.println("Total Working days : " + totalWorkingDays);
+
 	}
 
 }
