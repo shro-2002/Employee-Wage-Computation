@@ -8,7 +8,7 @@ public class EmployeeWage {
 		// TODO Auto-generated method stub
 		System.out.println("Welcome to Employee Wage  Computation Program");
 
-		addPartTimeEmployeeAndWage();
+		solvingUsingSwitchCase();
 
 	}
 
@@ -104,6 +104,54 @@ public class EmployeeWage {
 		empWage = empHrs * wage_per_hour;
 		System.out.println("Employee Wage : " + empWage);
 		return empWage;
+	}
+
+	// UC-4 : Solving using Switch Case Statement
+
+	/*
+	 * @params : None
+	 * 
+	 * @return : int[]
+	 * 
+	 * @Description : UC-4 Solving using Switch Case Statement
+	 */
+
+	public static int[] solvingUsingSwitchCase() {
+		int part_time;
+		int full_time;
+		int wage_per_hour = 20;
+		int empHrs = 0;
+		int empWage = 0;
+		int attend = Attendance.checkEmpPresentOrAbsent();
+
+		int[] empDetails = new int[2];
+
+		part_time = 0;
+		full_time = 1;
+
+		int time = RandomGenerator.employee_type();
+
+		switch (attend) {
+		case 1:
+			if (time == part_time) {
+				empHrs = 4;
+				System.out.println("Employee is Part Time");
+			} else if (time == full_time) {
+				empHrs = 8;
+				System.out.println("Employee is Full Time");
+			}
+			break;
+		default:
+			empHrs = 0;
+			System.out.println("Employee is Absent");
+		}
+
+		empWage = empHrs * wage_per_hour;
+		System.out.println("Employee Wage : " + empWage);
+		empDetails[0] = empWage;
+		empDetails[1] = empHrs;
+
+		return empDetails;
 	}
 
 }
