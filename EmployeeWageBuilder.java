@@ -1,5 +1,6 @@
 package com.bridgelabs.Master;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /*
@@ -16,6 +17,12 @@ class EmployeeWageBuilder implements EmpWageBuilder {
 	private final static int FULL_TIME = 1;
 	private static final int PRESENT = 1;
 	private static final int PART_TIME = 0;
+
+	private ArrayList<CompanyWage> allCompanies;
+
+	public EmployeeWageBuilder() {
+		this.allCompanies = new ArrayList<>();
+	}
 
 	/*
 	 * @ params : None
@@ -118,7 +125,7 @@ class EmployeeWageBuilder implements EmpWageBuilder {
 	}
 
 	@Override
-	public CompanyWage addDetails(Scanner sc) {
+	public void addDetails(Scanner sc) {
 		Scanner sc1 = new Scanner(System.in);
 
 		System.out.println("Company Name : ");
@@ -135,20 +142,28 @@ class EmployeeWageBuilder implements EmpWageBuilder {
 
 		CompanyWage Company = new CompanyWage(companyName, wagePerHour, maxWorkingDays, maxWorkingHours);
 
-		return Company;
+		allCompanies.add(Company);
 
 	}
 
 	@Override
-	public void printWages(CompanyWage[] allcompany, int companies) {
+	public void printWages() {
 
-		for (int i = 0; i < companies; i++) {
-			System.out.println("Company Name : " + allcompany[i].companyName);
-			System.out.println("Total Employee Wage : " + allcompany[i].totalEmpWage);
-			System.out.println("Total Employee Hours : " + allcompany[i].totalEmpHrs);
-			System.out.println("Total Working Days : " + allcompany[i].totalWorkingDays);
+		for (CompanyWage company : allCompanies) {
+			System.out.println("Company Name : " + company.companyName);
+			System.out.println("Total Employee Wage : " + company.totalEmpWage);
+			System.out.println("Total Employee Hours : " + company.totalEmpHrs);
+			System.out.println("Total Working Days : " + company.totalWorkingDays);
 			System.out.println();
 
+		}
+
+	}
+
+	@Override
+	public void calculateWages() {
+		for (CompanyWage company : allCompanies) {
+			calculateWagesTillCondition(company);
 		}
 
 	}

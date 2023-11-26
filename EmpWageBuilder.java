@@ -4,7 +4,8 @@ import java.util.Scanner;
 
 public interface EmpWageBuilder {
 
-	CompanyWage addDetails(Scanner sc);
-	void printWages(CompanyWage[] allcompany, int companies);
+	void addDetails(Scanner sc);
+	void printWages();
+	void calculateWages();
 
 }
