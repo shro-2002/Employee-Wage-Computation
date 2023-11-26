@@ -110,6 +110,7 @@ class EmployeeWageBuilder implements EmpWageBuilder {
 			empDetails = solvingUsingSwitchCase(Company);
 			totalEmpWage += empDetails[0];
 			totalEmpHrs += empDetails[1];
+			Company.addDailyWage(empDetails[0]);
 
 			totalWorkingDays++;
 
@@ -154,6 +155,7 @@ class EmployeeWageBuilder implements EmpWageBuilder {
 			System.out.println("Total Employee Wage : " + company.totalEmpWage);
 			System.out.println("Total Employee Hours : " + company.totalEmpHrs);
 			System.out.println("Total Working Days : " + company.totalWorkingDays);
+			System.out.println("Daily Wages: " + company.dailyWages);
 			System.out.println();
 
 		}
