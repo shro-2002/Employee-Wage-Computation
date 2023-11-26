@@ -25,33 +25,17 @@ public class EmployeeWage {
 		CompanyWage[] allcompany = new CompanyWage[companies];
 
 		for (int i = 0; i < companies; i++) {
-			System.out.println("Company Name : ");
-			String companyName = sc.next();
 
-			System.out.println("Enter wage per hour");
-			int wagePerHour = sc.nextInt();
-
-			System.out.println("Enter maximum working days");
-			int maxWorkingDays = sc.nextInt();
-
-			System.out.println("Enter maximum working hours");
-			int maxWorkingHours = sc.nextInt();
-
-			CompanyWage compwage = new CompanyWage(companyName, wagePerHour, maxWorkingDays, maxWorkingHours);
-
-			EmployeeWageBuilder employeeWage = new EmployeeWageBuilder(compwage);
-
-			employeeWage.calculateWagesTillCondition(compwage);
-
-			allcompany[i] = compwage;
+			System.out.println("Enter details for company " + (i + 1));
+			EmployeeWageBuilder employeeWage = new EmployeeWageBuilder();
+			allcompany[i] = employeeWage.addDetails(sc);
+			employeeWage.calculateWagesTillCondition(allcompany[i]);
 
 		}
 
 		// print the total wage for each company
-		for (int i = 0; i < companies; i++) {
-			System.out.println("Total wage for " + allcompany[i].companyName + " is " + allcompany[i].totalEmpWage);
-
-		}
+		EmployeeWageBuilder employeeWage = new EmployeeWageBuilder();
+		employeeWage.printWages(allcompany, companies);
 
 	}
 }
