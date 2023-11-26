@@ -29,12 +29,12 @@ class EmployeeWageBuilder {
 	 * @Description : Parameterized Constructor
 	 */
 
-	EmployeeWageBuilder(String companyName, int wagePerHour, int maxWorkingDays, int maxWorkingHours) {
+	EmployeeWageBuilder(CompanyWage Company) {
 
-		this.companyName = companyName;
-		this.wagePerHour = wagePerHour;
-		this.maxWorkingDays = maxWorkingDays;
-		this.maxWorkingHours = maxWorkingHours;
+		this.companyName = Company.companyName;
+		this.wagePerHour = Company.wagePerHour;
+		this.maxWorkingDays = Company.maxWorkingDays;
+		this.maxWorkingHours = Company.maxWorkingHours;
 	}
 
 	/*
@@ -198,7 +198,7 @@ class EmployeeWageBuilder {
 	 * or days is reached for a month
 	 */
 
-	public void calculateWagesTillCondition() {
+	public void calculateWagesTillCondition(CompanyWage Company) {
 
 		int totalEmpHrs, totalWorkingDays, totalEmpWage;
 		totalEmpHrs = totalWorkingDays = totalEmpWage = 0;
@@ -216,10 +216,10 @@ class EmployeeWageBuilder {
 			System.out.println();
 
 		}
-		System.out.println("Company Name : " + companyName);
-		System.out.println("Total Employee Wage : " + totalEmpWage);
-		System.out.println("Total Working hours : " + totalEmpHrs);
-		System.out.println("Total Working days : " + totalWorkingDays);
+
+		Company.setTotalEmpWage(totalEmpWage);
+		Company.setTotalEmpHrs(totalEmpHrs);
+		Company.setTotalWorkingDays(totalWorkingDays);
 		System.out.println();
 
 	}

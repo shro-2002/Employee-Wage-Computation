@@ -18,41 +18,40 @@ public class EmployeeWage {
 //	
 
 		System.out.println("Welcome to Employee Wage Computation Program");
-		int choice = 0;
 
-		while (true) {
-			System.out.println("1. Calculate Wages for the Company");
-			System.out.println("2. Exit");
+		System.out.println("Enter the number of companies  : ");
+		int companies = sc.nextInt();
 
-			System.out.println("Enter your choice");
-			choice = sc.nextInt();
+		CompanyWage[] allcompany = new CompanyWage[companies];
 
-			switch (choice) {
-			case 1:
-				System.out.println("Company Name : ");
-				String companyName = sc.next();
+		for (int i = 0; i < companies; i++) {
+			System.out.println("Company Name : ");
+			String companyName = sc.next();
 
-				System.out.println("Enter wage per hour");
-				int wagePerHour = sc.nextInt();
+			System.out.println("Enter wage per hour");
+			int wagePerHour = sc.nextInt();
 
-				System.out.println("Enter maximum working days");
-				int maxWorkingDays = sc.nextInt();
+			System.out.println("Enter maximum working days");
+			int maxWorkingDays = sc.nextInt();
 
-				System.out.println("Enter maximum working hours");
-				int maxWorkingHours = sc.nextInt();
+			System.out.println("Enter maximum working hours");
+			int maxWorkingHours = sc.nextInt();
 
-				EmployeeWageBuilder employeeWage = new EmployeeWageBuilder(companyName, wagePerHour, maxWorkingDays,
-						maxWorkingHours);
+			CompanyWage compwage = new CompanyWage(companyName, wagePerHour, maxWorkingDays, maxWorkingHours);
 
-				employeeWage.calculateWagesTillCondition();
-				break;
-			case 2:
-				System.out.println("Thank You");
-				System.exit(0);
-				break;
-			default:
-				System.out.println("Invalid Choice");
-			}
+			EmployeeWageBuilder employeeWage = new EmployeeWageBuilder(compwage);
+
+			employeeWage.calculateWagesTillCondition(compwage);
+
+			allcompany[i] = compwage;
+
 		}
+
+		// print the total wage for each company
+		for (int i = 0; i < companies; i++) {
+			System.out.println("Total wage for " + allcompany[i].companyName + " is " + allcompany[i].totalEmpWage);
+
+		}
+
 	}
 }
