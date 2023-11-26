@@ -37,5 +37,13 @@ public class EmployeeWage {
 
 		employeeWage.printWages();
 
+		System.out.print("Enter the Company name to find: ");
+		String Comp = sc.next();
+
+		if (employeeWage.getTotalWageByCompany(Comp) != -1)
+			System.out.print("Company Wages:  " + employeeWage.getTotalWageByCompany(Comp));
+		else
+			System.out.print("Company Not Found  ");
+
 	}
 }

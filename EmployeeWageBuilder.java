@@ -170,4 +170,15 @@ class EmployeeWageBuilder implements EmpWageBuilder {
 
 	}
 
+	@Override
+	public int getTotalWageByCompany(String companyName) {
+		for (CompanyWage company : allCompanies) {
+			if (company.companyName.equals(companyName)) {
+				return company.totalEmpWage;
+			}
+		}
+		return -1;
+
+	}
+
 }

@@ -7,5 +7,6 @@ public interface EmpWageBuilder {
 	void addDetails(Scanner sc);
 	void printWages();
 	void calculateWages();
+	int getTotalWageByCompany(String companyName);
 
 }
