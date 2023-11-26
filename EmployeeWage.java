@@ -1,11 +1,25 @@
 package com.bridgelabs.Master;
 
+/*
+ * @Class Variables: 6
+ * 
+ * @Class Methods: 7
+ * 
+ * @Description: Calculating and Managing employee wages based on different conditions
+ */
+
 public class EmployeeWage {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println("Welcome to Employee Wage  Computation Program");
+	private final static int FULL_TIME = 1;
+	private static final int PRESENT = 1;
+	private static final int WAGE_PER_HOUR = 20;
+	private static final int PART_TIME = 0;
+	private static final int NUM_OF_WORKING_DAYS = 20;
+	private static final int MAX_WORKING_HRS = 100;
 
+	public static void main(String[] args) {
+
+		System.out.println("Welcome to Employee Wage  Computation Program");
 		calculateWagesTillCondition();
 
 	}
@@ -19,7 +33,7 @@ public class EmployeeWage {
 	 */
 
 	public static int checkEmpPresentOrAbsent() {
-		int PRESENT = 1;
+
 		int empCheck = RandomGenerator.generateattendance();
 
 		if (empCheck == PRESENT)
@@ -41,17 +55,10 @@ public class EmployeeWage {
 	public static int calculateDailyEmployeeWage() {
 
 		int attend = checkEmpPresentOrAbsent();
-		int full_time = 1;
-		int wage_per_hour = 20;
-		int empHrs = 0;
-		int empWage = 0;
 
-		if (attend == full_time)
-			empHrs = 8;
-		else
-			empHrs = 0;
+		int empHrs = (attend == PRESENT) ? 8 : 0;
 
-		empWage = empHrs * wage_per_hour;
+		int empWage = empHrs * WAGE_PER_HOUR;
 		System.out.println("Employee Wage : " + empWage);
 		return empWage;
 
@@ -67,39 +74,34 @@ public class EmployeeWage {
 	 * @Description : UC-3 Add Part Time Employee and Wage
 	 */
 	public static int addPartTimeEmployeeAndWage() {
-		int part_time;
-		int full_time, present;
-		int wage_per_hour = 20;
-		int empHrs = 0;
-		int empWage = 0;
-		int attend = checkEmpPresentOrAbsent();
 
-		part_time = 0;
-		full_time = present = 1;
+		int empHrs = 0;
+
+		int attend = checkEmpPresentOrAbsent();
 
 		int time = RandomGenerator.employee_type();
 
-//		If employee present
-		if (attend == present)
+//			If employee present
+		if (attend == PRESENT)
 
 		{
-//			Part time
-			if (time == part_time) {
+//				Part time
+			if (time == PART_TIME) {
 				empHrs = 4;
 				System.out.println("Employee is Part Time");
 			}
-//			Full-time
-			else if (time == full_time) {
+//				Full-time
+			else if (time == FULL_TIME) {
 				empHrs = 8;
 				System.out.println("Employee is Full Time");
 			}
 		}
-//			If absent
+//				If absent
 
 		else
 			empHrs = 0;
 
-		empWage = empHrs * wage_per_hour;
+		int empWage = empHrs * WAGE_PER_HOUR;
 		System.out.println("Employee Wage : " + empWage);
 		return empWage;
 	}
@@ -115,26 +117,20 @@ public class EmployeeWage {
 	 */
 
 	public static int[] solvingUsingSwitchCase() {
-		int part_time;
-		int full_time;
-		int wage_per_hour = 20;
-		int empHrs = 0;
-		int empWage = 0;
+
 		int attend = checkEmpPresentOrAbsent();
+		int empHrs = 0;
 
 		int[] empDetails = new int[2];
-
-		part_time = 0;
-		full_time = 1;
 
 		int time = RandomGenerator.employee_type();
 
 		switch (attend) {
 		case 1:
-			if (time == part_time) {
+			if (time == PART_TIME) {
 				empHrs = 4;
 				System.out.println("Employee is Part Time");
-			} else if (time == full_time) {
+			} else if (time == FULL_TIME) {
 				empHrs = 8;
 				System.out.println("Employee is Full Time");
 			}
@@ -144,7 +140,7 @@ public class EmployeeWage {
 			System.out.println("Employee is Absent");
 		}
 
-		empWage = empHrs * wage_per_hour;
+		int empWage = empHrs * WAGE_PER_HOUR;
 		System.out.println("Employee Wage : " + empWage);
 		empDetails[0] = empWage;
 		empDetails[1] = empHrs;
@@ -163,8 +159,6 @@ public class EmployeeWage {
 	 */
 
 	public static void calculateWagesForMonth() {
-
-		int NUM_OF_WORKING_DAYS = 20;
 
 		int totalEmpWage = 0;
 
@@ -199,7 +193,7 @@ public class EmployeeWage {
 
 		int[] empDetails = new int[2];
 
-		while (totalEmpHrs <= 100 && totalWorkingDays < 20) {
+		while (totalEmpHrs <= MAX_WORKING_HRS && totalWorkingDays < NUM_OF_WORKING_DAYS) {
 			System.out.println("DAY: " + (totalWorkingDays + 1));
 			empDetails = solvingUsingSwitchCase();
 			totalEmpWage += empDetails[0];
