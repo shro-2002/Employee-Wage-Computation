@@ -1,5 +1,7 @@
 package com.bridgelabs.Master;
 
+import java.util.Scanner;
+
 /*
  * @Class Variables: 6
  * 
@@ -12,15 +14,47 @@ public class EmployeeWage {
 
 	private final static int FULL_TIME = 1;
 	private static final int PRESENT = 1;
-	private static final int WAGE_PER_HOUR = 20;
 	private static final int PART_TIME = 0;
-	private static final int NUM_OF_WORKING_DAYS = 20;
-	private static final int MAX_WORKING_HRS = 100;
 
 	public static void main(String[] args) {
 
+		Scanner sc = new Scanner(System.in);
+//		
+
 		System.out.println("Welcome to Employee Wage  Computation Program");
-		calculateWagesTillCondition();
+		int choice = 0;
+
+		while (true) {
+			System.out.println("1. Calculate Wages for the Company");
+			System.out.println("2. Exit");
+
+			System.out.println("Enter your choice");
+			choice = sc.nextInt();
+
+			switch (choice) {
+			case 1:
+				System.out.println("Company Name : ");
+				String companyName = sc.next();
+
+				System.out.println("Enter wage per hour");
+				int wagePerHour = sc.nextInt();
+
+				System.out.println("Enter maximum working days");
+				int maxWorkingDays = sc.nextInt();
+
+				System.out.println("Enter maximum working hours");
+				int maxWorkingHours = sc.nextInt();
+
+				calculateWagesTillCondition(companyName, wagePerHour, maxWorkingDays, maxWorkingHours);
+				break;
+			case 2:
+				System.out.println("Thank You");
+				System.exit(0);
+				break;
+			default:
+				System.out.println("Invalid Choice");
+			}
+		}
 
 	}
 
@@ -52,13 +86,13 @@ public class EmployeeWage {
 	 * @Description : UC-2 Calculate Daily Employee Wage
 	 */
 
-	public static int calculateDailyEmployeeWage() {
+	public static int calculateDailyEmployeeWage(int wagePerHour) {
 
 		int attend = checkEmpPresentOrAbsent();
 
 		int empHrs = (attend == PRESENT) ? 8 : 0;
 
-		int empWage = empHrs * WAGE_PER_HOUR;
+		int empWage = empHrs * wagePerHour;
 		System.out.println("Employee Wage : " + empWage);
 		return empWage;
 
@@ -73,7 +107,7 @@ public class EmployeeWage {
 	 * 
 	 * @Description : UC-3 Add Part Time Employee and Wage
 	 */
-	public static int addPartTimeEmployeeAndWage() {
+	public static int addPartTimeEmployeeAndWage(int wagePerHour) {
 
 		int empHrs = 0;
 
@@ -101,7 +135,7 @@ public class EmployeeWage {
 		else
 			empHrs = 0;
 
-		int empWage = empHrs * WAGE_PER_HOUR;
+		int empWage = empHrs * wagePerHour;
 		System.out.println("Employee Wage : " + empWage);
 		return empWage;
 	}
@@ -116,7 +150,7 @@ public class EmployeeWage {
 	 * @Description : UC-4 Solving using Switch Case Statement
 	 */
 
-	public static int[] solvingUsingSwitchCase() {
+	public static int[] solvingUsingSwitchCase(int wagePerHour) {
 
 		int attend = checkEmpPresentOrAbsent();
 		int empHrs = 0;
@@ -140,7 +174,7 @@ public class EmployeeWage {
 			System.out.println("Employee is Absent");
 		}
 
-		int empWage = empHrs * WAGE_PER_HOUR;
+		int empWage = empHrs * wagePerHour;
 		System.out.println("Employee Wage : " + empWage);
 		empDetails[0] = empWage;
 		empDetails[1] = empHrs;
@@ -158,15 +192,15 @@ public class EmployeeWage {
 	 * @Description : UC-5 Calculating Wages for a Month
 	 */
 
-	public static void calculateWagesForMonth() {
+	public static void calculateWagesForMonth(String companyName, int wagePerHour, int maxWorkingDays) {
 
 		int totalEmpWage = 0;
 
 		int[] empDetails = new int[2];
 
-		for (int day = 0; day < NUM_OF_WORKING_DAYS; day++) {
+		for (int day = 0; day < maxWorkingDays; day++) {
 			System.out.println(day + 1);
-			empDetails = solvingUsingSwitchCase();
+			empDetails = solvingUsingSwitchCase(wagePerHour);
 			totalEmpWage += empDetails[0];
 
 		}
@@ -185,7 +219,8 @@ public class EmployeeWage {
 	 * or days is reached for a month
 	 */
 
-	public static void calculateWagesTillCondition() {
+	public static void calculateWagesTillCondition(String companyName, int wagePerHour, int maxWorkingDays,
+			int maxWorkingHours) {
 
 		int totalEmpHrs, totalWorkingDays, totalEmpWage;
 
@@ -193,9 +228,9 @@ public class EmployeeWage {
 
 		int[] empDetails = new int[2];
 
-		while (totalEmpHrs <= MAX_WORKING_HRS && totalWorkingDays < NUM_OF_WORKING_DAYS) {
+		while (totalEmpHrs <= maxWorkingHours && totalWorkingDays < maxWorkingDays) {
 			System.out.println("DAY: " + (totalWorkingDays + 1));
-			empDetails = solvingUsingSwitchCase();
+			empDetails = solvingUsingSwitchCase(wagePerHour);
 			totalEmpWage += empDetails[0];
 			totalEmpHrs += empDetails[1];
 
@@ -204,10 +239,11 @@ public class EmployeeWage {
 			System.out.println();
 
 		}
-
+		System.out.println("Company Name : " + companyName);
 		System.out.println("Total Employee Wage : " + totalEmpWage);
 		System.out.println("Total Working hours : " + totalEmpHrs);
 		System.out.println("Total Working days : " + totalWorkingDays);
+		System.out.println();
 
 	}
 
